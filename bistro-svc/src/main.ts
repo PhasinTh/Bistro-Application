@@ -10,7 +10,7 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
   app.enableCors()
-  await app.listen(5001);
+  await app.listen(URL);
   Logger.log(`Application is running on: ${app.getUrl()}`, 'Main')
 }
 
