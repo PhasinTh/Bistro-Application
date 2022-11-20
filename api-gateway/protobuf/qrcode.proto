@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package qrcode;
+
+service QRCodeService {
+  rpc CreateQRCode(CreateQRCode) returns (QRCode) {
+    option (google.api.http) = {
+      post: "/v1/qrcode-service"
+      body: "*"
+    };
+  }
+  rpc UpdateQRCode(QRCode) returns (QRCode) {
+    option (google.api.http) = {
+      put: "/v1/qrcode-service/{id}"
+      body: "*"
+    }
+  }
+  rpc DeleteQRCode(QRCodeRequestId) returns (QRCode) {
+    option (google.api.http) = {
+      delete: "/v1/qrcode-service/{id}"
+    }
+  }
+  rpc GetQRCode(QRCodeRequestId) returns (QRCode) {
+    option (google.api.http) = {
+      get: "/v1/qrcode-service/{id}"
+    }
+  }
+  rpc GetQRCodes(GetQRCodesRequest) returns (GetQRCodesResponse) {
+    option (google.api.http) = {
+      get: "/v1/qrcode-service"
+    }
+  }
+}
+
+message QRCode {
+ string id = 1;
+ string name = 2;
+ string image = 3;
+ string description = 4;
+ string qrcodeId = 5;
+}
+
+message QRCodeRequestId {
+  string id = 1;
+}
+
+message GetQRCodesRequest {
+  int64 page = 1;
+  int64 limit = 2;
+}
+
+message Meta {
+  int64 totalItems = 1;
+  int64 itemCount = 2;
+  int64 itemsPerPage = 3;
+  int64 totalPages = 4;
+  int64 currentPage = 5;
+}
+
+message GetQRCodesResponse {
+  repeated QRCode items = 1;
+  Meta meta = 2;
+}
+
+message CreateQRCode {
+  string name = 1;
+  string image = 2;
+  string qrcodeId = 3;
+}
+
+message UpdateQRCode {
+  string id = 1;
+  string name = 2;
+  string image = 3;
+  string description = 4;
+  string qrcodeId = 5;
+}

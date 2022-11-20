@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  postgres-db:
+    image: postgres
+    environment:
+      POSTGRES_DB: ${PG_DATABASE:-postgres}
+      POSTGRES_USER: ${PG_USER:-postgres}
+      POSTGRES_PASSWORD: ${PG_PASSWORD:-postgres}
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${PG_USER:-postgres}"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    ports:
+      - "5432:5432"
+    restart: on-failure
