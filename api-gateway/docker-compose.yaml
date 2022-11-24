@@ -123,4 +123,4 @@ services:
     depends_on:
       - kong-db
     ports:
-      - "127.0.0.1:1337:1337/tcp"
+      - "0.0.0.0:1337:1337/tcp"
