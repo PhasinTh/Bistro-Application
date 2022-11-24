@@ -3,7 +3,7 @@ syntax = "proto3";
 package menu;
 
 service MenuService {
-  rpc CreateMenu(CreateMenu) returns (Menu) {}
+  rpc CreateMenu(CreateMenuRequest) returns (Menu) {}
   rpc UpdateMenu(Menu) returns (Menu) {}
   rpc DeleteMenu(MenuRequestId) returns (Menu) {}
   rpc GetMenu(MenuRequestId) returns (Menu) {}
@@ -17,6 +17,7 @@ message Menu {
  string image = 3;
  string description = 4;
  string bistroId = 5;
+ int32 price = 6;
 }
 
 message MenuRequestId {
@@ -24,16 +25,16 @@ message MenuRequestId {
 }
 
 message GetMenusRequest {
-  int64 page = 1;
-  int64 limit = 2;
+  int32 page = 1;
+  int32 limit = 2;
 }
 
 message Meta {
-  int64 totalItems = 1;
-  int64 itemCount = 2;
-  int64 itemsPerPage = 3;
-  int64 totalPages = 4;
-  int64 currentPage = 5;
+  int32 totalItems = 1;
+  int32 itemCount = 2;
+  int32 itemsPerPage = 3;
+  int32 totalPages = 4;
+  int32 currentPage = 5;
 }
 
 message GetMenusByBistroRequest {
@@ -46,11 +47,12 @@ message GetMenusResponse {
   GetMenusRequest meta = 2;
 }
 
-message CreateMenu {
+message CreateMenuRequest {
   string name = 1;
   string image = 2;
   string description = 3;
   string bistroId = 4;
+  int32 price = 5;
 }
 
 message UpdateMenu {
@@ -59,4 +61,5 @@ message UpdateMenu {
   string image = 3;
   string description = 4;
   string bistroId = 5;
+  int32 price = 6;
 }

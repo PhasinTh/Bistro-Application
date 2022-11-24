@@ -18,7 +18,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "proto:bistro": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto -I=src --ts_proto_out=src/bistro/proto/ src/bistro.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.7.3",
@@ -29,8 +30,6 @@
     "@nestjs/microservices": "^9.2.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^9.0.1",
-    "@nestjsx/crud": "^5.0.0-alpha.3",
-    "@nestjsx/crud-typeorm": "^5.0.0-alpha.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "nestjs-typeorm-paginate": "^4.0.2",
@@ -39,6 +38,7 @@
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "sqlite3": "^5.1.2",
+    "ts-proto": "^1.133.0",
     "typeorm": "^0.3.10"
   },
   "devDependencies": {

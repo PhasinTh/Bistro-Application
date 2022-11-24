@@ -3,11 +3,12 @@ syntax = "proto3";
 package bistro;
 
 service BistroService {
-  rpc CreateBistro(CreateBistro) returns (Bistro) {}
+  rpc CreateBistro(CreateBistroRequest) returns (Bistro) {}
   rpc UpdateBistro(Bistro) returns (Bistro) {}
   rpc DeleteBistro(BistroRequestId) returns (Bistro) {}
   rpc GetBistro(BistroRequestId) returns (Bistro) {}
   rpc GetBistros(GetBistrosRequest) returns (GetBistrosResponse) {}
+  rpc GetBistroByOwner(GetBistroByOwnerRequest) returns (Bistro) {}
 }
 
 message Bistro {
@@ -40,7 +41,11 @@ message GetBistrosResponse {
   Meta meta = 2;
 }
 
-message CreateBistro {
+message GetBistroByOwnerRequest {
+  string ownerId = 1;
+}
+
+message CreateBistroRequest {
   string name = 1;
   string image = 2;
   string description = 3;
@@ -54,3 +59,4 @@ message UpdateBistro {
   string description = 4;
   string ownerId = 5;
 }
+

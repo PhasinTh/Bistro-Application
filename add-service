@@ -1,8 +1,0 @@
-// curl -X POST localhost:8001/services --data name=order-service --data protocol=grpc --data host=order-svc --data port=3000
-// curl -X POST localhost:8001/services/order-service/routes --data protocols=http --data name=order-http --data paths[]=/
-// curl -X POST localhost:8001/services/order-service/plugins --data name=grpc-gateway --data "config.proto=/opt/kong/protobuf/order.proto"
-// curl -X POST localhost:8001/routes/order-http/plugins --data name=grpc-gateway --data "config.proto=/opt/kong/protobuf/order.proto"
-// curl -X POST localhost:8001/services --data name=menu-service --data protocol=grpc --data host=menu-svc --data port=3000
-// curl -X POST localhost:8001/services/menu-service/routes --data protocols=http --data name=menu-http --data paths[]=/
-// curl -X POST localhost:8001/services/menu-service/plugins --data name=grpc-gateway --data "config.proto=/opt/kong/protobuf/menu.proto"
-// curl -X POST localhost:8001/routes/menu-http/plugins --data name=grpc-gateway --data "config.proto=/opt/kong/protobuf/menu.proto"

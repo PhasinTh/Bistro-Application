@@ -808,13 +808,6 @@
     "@nestjsx/util" "^5.0.0-alpha.3"
     qs "^6.8.0"
 
-"@nestjsx/crud-typeorm@*":
-  version "5.0.0-alpha.3"
-  resolved "https://registry.npmjs.org/@nestjsx/crud-typeorm/-/crud-typeorm-5.0.0-alpha.3.tgz"
-  integrity sha512-9FN4iBELmhhSoVJj8457kaNGFKhm7IA7zJbLJRGuIb0+12WwCOhY0/bhMg1pWgZ1qUYtkYoELyMiMDroPPtARw==
-  dependencies:
-    "@zmotivat0r/o0" "^1.0.2"
-
 "@nestjsx/crud@^5.0.0-alpha.3":
   version "5.0.0-alpha.3"
   resolved "https://registry.npmjs.org/@nestjsx/crud/-/crud-5.0.0-alpha.3.tgz"
@@ -1408,11 +1401,6 @@
   version "4.2.2"
   resolved "https://registry.npmjs.org/@xtuc/long/-/long-4.2.2.tgz"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
-
-"@zmotivat0r/o0@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/@zmotivat0r/o0/-/o0-1.0.2.tgz"
-  integrity sha512-wQ/sHqJEtYb+QtgxtWlBpGASFZ2avpoRWbvpginEuy7howZHTZTy3zYMRMaBKok4bZwIGU5bjmzE59+m1IWqKQ==
 
 abbrev@1:
   version "1.1.1"

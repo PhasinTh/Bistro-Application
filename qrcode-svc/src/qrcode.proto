@@ -3,11 +3,12 @@ syntax = "proto3";
 package qrcode;
 
 service QRCodeService {
-  rpc CreateQRCode(CreateQRCode) returns (QRCode) {}
-  rpc UpdateQRCode(QRCode) returns (QRCode) {}
+  rpc CreateQRCode(CreateQRCodeRequest) returns (QRCode) {}
+  rpc UpdateQRCode(UpdateQRCodeRequest) returns (QRCode) {}
   rpc DeleteQRCode(QRCodeRequestId) returns (QRCode) {}
   rpc GetQRCode(QRCodeRequestId) returns (QRCode) {}
   rpc GetQRCodes(GetQRCodesRequest) returns (GetQRCodesResponse) {}
+  rpc GetQRCodeByBistro(GetQRByBistroRequest) returns (GetQRCodesResponse) {}
 }
 
 message QRCode {
@@ -21,16 +22,21 @@ message QRCodeRequestId {
 }
 
 message GetQRCodesRequest {
-  int64 page = 1;
-  int64 limit = 2;
+  int32 page = 1;
+  int32 limit = 2;
+}
+
+message GetQRByBistroRequest {
+  string bistroId = 1;
+  Meta meta = 2;
 }
 
 message Meta {
-  int64 totalItems = 1;
-  int64 itemCount = 2;
-  int64 itemsPerPage = 3;
-  int64 totalPages = 4;
-  int64 currentPage = 5;
+  int32 totalItems = 1;
+  int32 itemCount = 2;
+  int32 itemsPerPage = 3;
+  int32 totalPages = 4;
+  int32 currentPage = 5;
 }
 
 message GetQRCodesResponse {
@@ -38,13 +44,13 @@ message GetQRCodesResponse {
   Meta meta = 2;
 }
 
-message CreateQRCode {
+message CreateQRCodeRequest {
   string name = 1;
-  string qrcodeId = 2;
+  string bistroId = 2;
 }
 
-message UpdateQRCode {
+message UpdateQRCodeRequest {
   string id = 1;
   string name = 2;
-  string qrcodeId = 3;
+  string bistroId = 3;
 }

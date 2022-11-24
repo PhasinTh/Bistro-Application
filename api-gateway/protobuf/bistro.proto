@@ -3,33 +3,41 @@ syntax = "proto3";
 package bistro;
 
 service BistroService {
-  rpc CreateBistro(CreateBistro) returns (Bistro) {
+  rpc CreateBistro(CreateBistroRequest) returns (Bistro) {
     option (google.api.http) = {
       post: "/v1/bistro-service"
       body: "*"
-    }
+    };
   }
+
+  rpc GetBistroByOwner(GetBistroByOwnerRequest) returns (Bistro) {
+    option (google.api.http) = {
+      get: "/v1/bistro-service/owner/{ownerId}"
+    };
+  }
+
   rpc UpdateBistro(Bistro) returns (Bistro) {
     option (google.api.http) = {
       put: "/v1/bistro-service/{id}"
       body: "*"
-    }
+    };
   }
   rpc DeleteBistro(BistroRequestId) returns (Bistro) {
     option (google.api.http) = {
       delete: "/v1/bistro-service/{id}"
-    }
+    };
   }
   rpc GetBistro(BistroRequestId) returns (Bistro) {
     option (google.api.http) = {
       get: "/v1/bistro-service/{id}"
-    }
+    };
   }
   rpc GetBistros(GetBistrosRequest) returns (GetBistrosResponse) {
     option (google.api.http) = {
       get: "/v1/bistro-service"
-    }
+    };
   }
+
 }
 
 message Bistro {
@@ -62,7 +70,7 @@ message GetBistrosResponse {
   Meta meta = 2;
 }
 
-message CreateBistro {
+message CreateBistroRequest {
   string name = 1;
   string image = 2;
   string description = 3;
@@ -75,4 +83,8 @@ message UpdateBistro {
   string image = 3;
   string description = 4;
   string ownerId = 5;
+}
+
+message GetBistroByOwnerRequest {
+  string ownerId = 1;
 }

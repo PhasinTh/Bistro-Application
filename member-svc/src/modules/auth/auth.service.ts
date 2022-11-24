@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   async validateJwtPayload(payload: JwtPayload): Promise<User | undefined> {
-    const user = await this.userService.findOne({where: { id: payload.sub }});
+    const user = await this.userService.findOne({ where: { id: payload.sub } });
     if (user) {
       delete user['password'];
       return user;
@@ -37,11 +37,15 @@ export class AuthService {
     const payload = {
       sub: user.id,
       name: user.name,
-      iss: process.env.ISS || ''
+      iss: process.env.JWT_ISS || '',
     } as JwtPayload;
     const token = await this.createJwt(payload);
+    const foundUser = await this.userService.findOne({
+      where: { id: user.id },
+    });
+    delete foundUser['password'];
     return {
-      userId: user.id,
+      user: foundUser,
       accessToken: token,
     };
   }
@@ -52,7 +56,7 @@ export class AuthService {
       Object.assign(userAttempt, user);
       await this.userService.repo.insert(userAttempt);
       delete userAttempt['password'];
-      return userAttempt; 
+      return userAttempt;
     } catch (error) {
       return error;
     }

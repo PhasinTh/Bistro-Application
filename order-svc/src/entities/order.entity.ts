@@ -1,5 +1,13 @@
-import { Column, CreateDateColumn, Entity, Index, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { OrderItem } from "./order-item.entity";
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    Index,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from 'typeorm'
+import { OrderItem } from './order-item.entity'
 
 @Entity()
 export class Order {
@@ -14,19 +22,26 @@ export class Order {
     @Column()
     qrcodeId: string
 
-    @Column({nullable: true})
+    @Column({ nullable: true })
     qrcodeName: string
 
     @OneToMany(() => OrderItem, (item) => item.order)
     items: OrderItem[]
 
-    @Column({nullable: true})
+    @Column({ nullable: true })
     isPaid: boolean
 
-    @CreateDateColumn({ type: 'timestamptz', default: () => "CURRENT_TIMESTAMP(6)" })
+    @CreateDateColumn({
+        type: 'timestamptz',
+        default: () => 'CURRENT_TIMESTAMP(6)',
+    })
     createAt: Date
 
-    @UpdateDateColumn({ type: 'timestamptz', default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+    @UpdateDateColumn({
+        type: 'timestamptz',
+        default: () => 'CURRENT_TIMESTAMP(6)',
+        onUpdate: 'CURRENT_TIMESTAMP(6)',
+    })
     updatedAt: Date
 
     @Column({ type: 'timestamptz', nullable: true })

@@ -25,7 +25,7 @@ import { JwtAuthGuard } from 'src/guards/auth.guard';
     alwaysPaginate: true,
   },
 })
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 @ApiTags('User')
 @Controller('user')

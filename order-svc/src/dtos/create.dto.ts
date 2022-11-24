@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsOptional, IsString, ValidationError, ValidatorOptions } from 'class-validator';
+import {
+    IsNotEmpty,
+    IsOptional,
+    IsString,
+    ValidationError,
+    ValidatorOptions,
+} from 'class-validator'
 export class CreateOrderDto {
     @IsString()
     @IsNotEmpty()

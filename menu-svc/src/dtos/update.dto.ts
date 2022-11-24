@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsString, ValidationError, ValidatorOptions } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator'
 export class UpdateMenuDto {
     @IsNotEmpty()
     @IsString()
@@ -7,16 +7,20 @@ export class UpdateMenuDto {
     @IsOptional()
     @IsString()
     name!: string
-    
+
     @IsString()
     @IsOptional()
     bistroId?: string
-  
+
     @IsString()
     @IsOptional()
     description?: string
-  
+
     @IsString()
     @IsOptional()
     image?: string
+
+    @IsOptional() _
+    @IsNumber()
+    price: number
 }

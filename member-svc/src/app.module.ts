@@ -8,27 +8,26 @@ import { UserModule } from './modules/user/user.module';
 
 const db_maps = {
   sqlite: 'sqlite',
-  postgres: 'postgres'
-}
+  postgres: 'postgres',
+};
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: db_maps[process.env.DB_DRIVER || 'postgres'],
+      type: db_maps[process.env.DB_DRIVER || 'sqlite'],
       host: process.env.DB_HOST || 'localhost',
-      database: process.env.DB_DATABASE || 'application_db',
+      database: process.env.DB_DATABASE || 'member_db',
       username: process.env.DB_USER || 'postgres',
       password: process.env.DB_PASSWORD || 'postgres',
       port: parseInt(process.env.PORT, 5432) || undefined,
       synchronize: process.env.NODE_ENV != 'production',
       logging: process.env.NODE_ENV != 'production',
-      entities: [User]
+      entities: [User],
     }),
     AuthModule,
     UserModule,
-    TypeOrmModule.forFeature([User])
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

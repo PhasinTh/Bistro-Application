@@ -3,13 +3,13 @@ syntax = "proto3";
 package qrcode;
 
 service QRCodeService {
-  rpc CreateQRCode(CreateQRCode) returns (QRCode) {
+  rpc CreateQRCode(CreateQRCodeRequest) returns (QRCode) {
     option (google.api.http) = {
       post: "/v1/qrcode-service"
       body: "*"
     };
   }
-  rpc UpdateQRCode(QRCode) returns (QRCode) {
+  rpc UpdateQRCode(UpdateQRCodeRequest) returns (QRCode) {
     option (google.api.http) = {
       put: "/v1/qrcode-service/{id}"
       body: "*"
@@ -30,48 +30,54 @@ service QRCodeService {
       get: "/v1/qrcode-service"
     }
   }
+  rpc GetQRCodeByBistro(GetQRByBistroRequest) returns (GetQRCodesResponse) {
+    option (google.api.http) = {
+      get: "/v1/qrcode-service/bistro/{bistroId}"
+    }
+  }
 }
 
 message QRCode {
- string id = 1;
- string name = 2;
- string image = 3;
- string description = 4;
- string qrcodeId = 5;
-}
-
-message QRCodeRequestId {
   string id = 1;
-}
-
-message GetQRCodesRequest {
-  int64 page = 1;
-  int64 limit = 2;
-}
-
-message Meta {
-  int64 totalItems = 1;
-  int64 itemCount = 2;
-  int64 itemsPerPage = 3;
-  int64 totalPages = 4;
-  int64 currentPage = 5;
-}
-
-message GetQRCodesResponse {
-  repeated QRCode items = 1;
+  string name = 2;
+  string bistroId = 3;
+ }
+ 
+ message QRCodeRequestId {
+   string id = 1;
+ }
+ 
+ message GetQRCodesRequest {
+   int32 page = 1;
+   int32 limit = 2;
+ }
+ 
+ message GetQRByBistroRequest {
+  string bistroId = 1;
   Meta meta = 2;
 }
 
-message CreateQRCode {
-  string name = 1;
-  string image = 2;
-  string qrcodeId = 3;
-}
-
-message UpdateQRCode {
-  string id = 1;
-  string name = 2;
-  string image = 3;
-  string description = 4;
-  string qrcodeId = 5;
-}
+ 
+ message Meta {
+   int32 totalItems = 1;
+   int32 itemCount = 2;
+   int32 itemsPerPage = 3;
+   int32 totalPages = 4;
+   int32 currentPage = 5;
+ }
+ 
+ message GetQRCodesResponse {
+   repeated QRCode items = 1;
+   Meta meta = 2;
+ }
+ 
+ message CreateQRCodeRequest {
+   string name = 1;
+   string bistroId = 2;
+ }
+ 
+ message UpdateQRCodeRequest {
+   string id = 1;
+   string name = 2;
+   string bistroId = 3;
+ }

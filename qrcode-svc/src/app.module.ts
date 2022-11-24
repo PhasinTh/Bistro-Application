@@ -7,14 +7,14 @@ import { QRCode } from './entities/qrcode.entity';
 
 const db_maps = {
   sqlite: 'sqlite',
-  postgres: 'postgres'
-}
+  postgres: 'postgres',
+};
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
-      type: db_maps[process.env.DB_DRIVER || 'postgres'],
+      type: db_maps[process.env.DB_DRIVER || 'sqlite'],
       host: process.env.DB_HOST || 'localhost',
       database: process.env.DB_DATABASE || 'application_db',
       username: process.env.DB_USER || '',
@@ -22,11 +22,11 @@ const db_maps = {
       port: parseInt(process.env.PORT, 5432) || undefined,
       synchronize: process.env.NODE_ENV != 'production',
       logging: process.env.NODE_ENV != 'production',
-      entities: [QRCode]
+      entities: [QRCode],
     }),
-    TypeOrmModule.forFeature([QRCode])
+    TypeOrmModule.forFeature([QRCode]),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

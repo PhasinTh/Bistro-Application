@@ -1,4 +1,4 @@
-import { Entity, Column} from "typeorm"
+import { Entity, Column } from 'typeorm';
 
 @Entity()
 export class QRCode {
@@ -6,8 +6,8 @@ export class QRCode {
   id: string;
 
   @Column()
-  bistroId: string
+  name: string;
 
   @Column()
-  name: string;
+  bistroId: string;
 }
