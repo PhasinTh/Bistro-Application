@@ -13,19 +13,31 @@ import {
 import { CtxOrReq } from 'next-auth/client/_utils'
 import LocalDiningIcon from '@mui/icons-material/LocalDining'
 import axios from '@/src/axios'
+import { Controller, useForm } from 'react-hook-form'
+import { useSnackbar } from 'notistack'
+import { signIn } from 'next-auth/react'
 
 export default function SignUp() {
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        const data = new FormData(event.currentTarget)
+    const { enqueueSnackbar } = useSnackbar()
 
-        const response = await axios.post('/auth-service/register', {
-            email: data.get('email'),
-            name: data.get('name'),
-            password: data.get('password'),
+    const { control, handleSubmit } = useForm({
+        defaultValues: {
+            email: '',
+            name: '',
+            password: '',
+        },
+    })
+
+    const onSubmit = async (data: any) => {
+        const response = await axios.post(`/auth-service/register`, {
+            email: data.email,
+            name: data.name,
+            password: data.password,
         })
-
-        console.log(response.data)
+        if (response.status == 201) {
+            enqueueSnackbar('สม้ครสมาชิกสำเร็จ', { variant: 'success' })
+            signIn()
+        }
     }
 
     return (
@@ -72,49 +84,75 @@ export default function SignUp() {
                             Bistro4.0: Online Menu
                         </Typography>
                         <Box
-                            component="form"
-                            noValidate
-                            onSubmit={handleSubmit}
                             sx={{ mt: 1 }}
+                            component="form"
+                            onSubmit={handleSubmit(onSubmit)}
                         >
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
+                            <Controller
                                 name="email"
-                                autoComplete="email"
-                                autoFocus
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="name"
-                                label="Name"
-                                name="name"
-                                autoComplete="name"
-                                autoFocus
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                            />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        value="remember"
-                                        color="primary"
+                                control={control}
+                                rules={{ required: 'กรุณาใส่อีเมล์' }}
+                                render={({
+                                    field,
+                                    fieldState: { error, invalid },
+                                }) => (
+                                    <TextField
+                                        {...field}
+                                        type="email"
+                                        placeholder={'email@email'}
+                                        label={'Email'}
+                                        helperText={error?.message}
+                                        error={invalid}
+                                        fullWidth
+                                        sx={{
+                                            my: 1,
+                                        }}
                                     />
-                                }
-                                label="Remember me"
+                                )}
+                            />
+                            <Controller
+                                name="name"
+                                control={control}
+                                rules={{ required: 'กรุณาระบุชื่อ' }}
+                                render={({
+                                    field,
+                                    fieldState: { error, invalid },
+                                }) => (
+                                    <TextField
+                                        {...field}
+                                        placeholder={'กรุณาระบุชื่อ'}
+                                        label={'ชื่อ'}
+                                        helperText={error?.message}
+                                        error={invalid}
+                                        fullWidth
+                                        sx={{
+                                            my: 1,
+                                        }}
+                                    />
+                                )}
+                            />
+
+                            <Controller
+                                name="password"
+                                control={control}
+                                rules={{ required: 'กรุณาใส่รหัสผ่าน' }}
+                                render={({
+                                    field,
+                                    fieldState: { error, invalid },
+                                }) => (
+                                    <TextField
+                                        {...field}
+                                        placeholder={'password'}
+                                        label={'รหัสผ่าน'}
+                                        helperText={error?.message}
+                                        error={invalid}
+                                        type="password"
+                                        fullWidth
+                                        sx={{
+                                            my: 1,
+                                        }}
+                                    />
+                                )}
                             />
                             <Button
                                 type="submit"
