@@ -62,9 +62,11 @@ export default function index() {
                                 </Link>
                             ) : (
                                 <>
-                                    <Button variant="outlined">
-                                        สมัครสมาชิก
-                                    </Button>
+                                    <Link href='/auth/signup'>
+                                        <Button variant="outlined">
+                                            สมัครสมาชิก
+                                        </Button>
+                                    </Link>
                                     <Button
                                         variant="contained"
                                         sx={{ px: 5 }}
