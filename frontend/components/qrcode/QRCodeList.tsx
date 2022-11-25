@@ -45,7 +45,7 @@ export default function QRCodeList({ items, onItemSelected }: OrderListProps) {
                                     >
                                         <QRCodeCanvas
                                             value={
-                                                process.env.REACT_APP_URL ||
+                                                process.env.NEXTAPP_URL ||
                                                 'http://178.128.26.253' +
                                                     '/makeorder?bistroId=' +
                                                     item.bistroId +

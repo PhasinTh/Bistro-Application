@@ -72,7 +72,7 @@ export default function QRCodeDialog({
                 >
                     <QRCodeSVG
                         value={
-                            process.env.REACT_APP_URL ||
+                            process.env.NEXTAPP_URL ||
                             'http://178.128.26.253' +
                                 '/makeorder?bistroId=' +
                                 item?.bistroId +
